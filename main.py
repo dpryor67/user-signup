@@ -4,12 +4,12 @@ import os
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-@app.route('/signup-form')
+@app.route('/')
 def index():
-    return render_template('signup_form.html')
+    return render_template('index.html')
 
 
-@app.route('/signup-form', methods=['POST'])
+@app.route('/', methods=['POST'])
 def validate_signup_form():
 
     username = request.form['username']
@@ -63,7 +63,7 @@ def validate_signup_form():
     if not username_error and not password_error and not verify_error and not email_error:
         return render_template('welcome.html', username=username)
     else:
-        return render_template('signup_form.html', username_error=username_error,
+        return render_template('index.html', username_error=username_error,
             password_error=password_error, verify_error=verify_error, email_error=email_error,
             username=username,
             email=email)
